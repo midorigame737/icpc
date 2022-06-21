@@ -1,28 +1,22 @@
 #include<iostream>
 #include<vector>
+#include<algorithm>
 using namespace std;
-class Allow{//矢印クラス
+class Allow{//遏｢蜊ｰ繧ｯ繝ｩ繧ｹ
     string spell;
     int next;
-    Allow(string s,int n){
-        spell=s;
-        next=n;
-    }
-    bool operator<(const Allow &another)const{
-        return spell<another.spell;
-    }
-};
-class contact{//接点クラス
-    private:
-        vector<Allow>allows;
+    int start;
+    
     public:
-
-    void SortAllow(){
-        
-    }      
+        bool operator<(const Allow &another)const{
+            return spell<another.spell;
+        }
 };
-int main(){
-    int size,allows,star,gold;
-    cin>>size>>allows>>star>>gold;
 
+int main(){
+    int size/*謗･轤ｹ縺ｮ謨ｰ*/,allowlen/*遏｢蜊ｰ縺ｮ謨ｰ*/,star,gold;
+    cin>>size>>allowlen>>star>>gold;
+    vector<Allow>allows;
+    allows.resize(allowlen);
+    
 }
