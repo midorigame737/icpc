@@ -1,5 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
+//部分和問題
 int main(){
     int N,A;
     cin>>N>>A;
