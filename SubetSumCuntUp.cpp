@@ -9,11 +9,11 @@ int main(){
     vector<vector<int>> dp(110,vector<int>(10010));
     dp[0][0]=1;
 
-    for(int i=0;i<N;++i){
-        for(int j=0;j<=Ans;++j){
-            (dp[i+1][j]+=dp[i][j])%=MOD;
-            if(a[i]<=j){
-                dp[i+1][j]+=dp[i][j-a[i]]%=MOD;
+    for(int i=0;i<N;++i){//aのインデックスのループ
+        for(int SumI=0;SumI<=Ans;++SumI){//Nまでの各和のループ
+            (dp[i+1][SumI]+=dp[i][SumI]);//0で初期化してるから大体実質的に代入してるだけ(多分)
+            if(a[i]<=SumI){
+                dp[i+1][SumI]+=dp[i][SumI-a[i]]%=MOD;
             }
         }
     }
