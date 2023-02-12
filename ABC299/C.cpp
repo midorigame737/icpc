@@ -12,10 +12,15 @@ int main(){
             cin>>v[i][j];
         }
     }
-    bitset<1024>b(0);
-    cout<<b;
-    for(int i=1;i<=n;++i){
-     
-        
+    int ans=0;
+    for(int b=0;b<(1<<m);b++){
+        set<int>s;
+        for(int i=0;i<m;++i){
+            if((b>>i)&1){
+                for(auto& x:v[i])s.insert(x);
+            }
+        }
+        ans+=(int)s.size()==n;
     }
+    cout<<ans<<"\n";
 }
