@@ -1,36 +1,28 @@
 #include<bits/stdc++.h>
 using namespace std;
-
+//#define DEBUG
 long long Subtractions(long long a,long long b,long long result){
-    //cout<<"a="<<a<<"b="<<b<<"result="<<result<<endl;
-    if(a==b){
-        //cout<<"a="<<a<<"b="<<b<<"result="<<result;
+    #ifdef DEBUG
+    cout<<"a="<<a<<"b="<<b<<"result="<<result<<endl;
+    #endif
+    if(a==b){    
         return result;
     }
-    //TODOもっと簡潔にかけるのであとで直す
-    if(a<b){
-        if(b%a!=0){
-            result+=b/a;
-            b=b%a;
-        }
-        else{
-            result+=(b-a)/a;
-            b=a;
-        }
-        return Subtractions(a,b,result);
+    int big=max(a,b);
+    int smal=min(a,b);
+    b=big;
+    a=smal;
+    if(b%a!=0){
+        result+=b/a;
+        b=b%a;
     }
     else{
-        if(a%b!=0){
-            result+=a/b;
-            a=a%b;
-        }
-        else{
-            result+=(a-b)/b;
-            a=b;
-        }
-        return Subtractions(a,b,result);
+        result+=(b-a)/a;
+        b=a;
     }
+    return Subtractions(a,b,result);
 }
+
 int main(){
     long long a,b;
     cin>>a>>b;
