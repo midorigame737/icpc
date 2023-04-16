@@ -15,7 +15,9 @@ int main(){
         if(type==1){
             int boxi;
             cin>>boxi;
-            //TODO pushbackに変更
+            /*TODO pushbackに変更
+            type2,3でO(nlog(n))かかるが、insertやるとそのたびにO(n)なのでこっちのほうが早い
+            */
             boxes[boxi].push_back(num);
             card[num].push_back(boxi);
         }
