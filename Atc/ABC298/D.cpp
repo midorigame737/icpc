@@ -2,13 +2,28 @@
 #include<algorithm>
 #include<cmath>
 #include<iostream>
+#define MODN 998244353
+//#define DEBUG
 using namespace std;
+
+long long Mypow(long long x,long long n){
+    long long result=1;
+    while(n){
+        if(n&1)result=(result*x)%MODN;
+        x=(x*x)%MODN;
+        n >>= 1;  // n ã‚’1bit å·¦ã«ãšã‚‰ã™
+        /*#ifdef DEBUG
+        cout<<"result="<<result<<"x="<<x<<"n="<<n<<endl;
+        #endif*/
+    }
+    return result;
+}
 //#define DEBUG
 int main(){
     int q;
     cin>>q;
-    deque<int>S (1,1);//Œ…”•Û‚·‚é‚½‚ß‚É—~‚µ‚¢
-    int result=1;
+    deque<int>S (1,1);//æ¡æ•°ä¿æŒã™ã‚‹ãŸã‚ã«æ¬²ã—ã„
+    long long  result=1;
     for(int i=0;i<q;++i){
         int t;
         cin>>t;
@@ -16,17 +31,19 @@ int main(){
             int x;
             cin>>x;
             S.push_back(x);
-            result=result*10+x;
+            result=(result*10%MODN+x)%MODN;
         }
         if(t==2){
             #ifdef DEBUG
             cout<<"S.size="<<S.size()-1<<endl;
+            cout<<"Mypow="<<Mypow(10,S.size()-1)*S.front()<<endl;
             #endif
-            result-=pow(10,S.size()-1)*S.front();
+            result-=(S.front()*Mypow(10,S.size()-1))%MODN;
+            if (result<0) result+=MODN;
             S.pop_front();
         }
         if(t==3){
-            cout<<result%998244353<<endl;
+            cout<<result<<endl;
         }
     }
     return 0;
