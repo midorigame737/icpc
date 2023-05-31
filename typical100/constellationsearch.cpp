@@ -20,10 +20,15 @@ int main(){
         int dx=starsign[0].first- star->first;
         int dy=starsign[0].second- star->second;
         //TODO星座が作れるか
+        int count=0;
         for(auto nextStar=starsign.begin()+1;nextStar!=starsign.end();++nextStar){
             if(stars.find({nextStar->first-dx,nextStar->second-dy})==stars.end()){
                 break;
             }
+            count++;
+        }
+        if(count==m){
+            cout<<dx<<" "<<dy;
         }
     }
 
