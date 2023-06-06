@@ -24,6 +24,40 @@ struct UnionFind
 };
 
 int main(){
-
+    int n,m;
+    cin>>n>>m;
+    UnionFind graph(n+1);
+    for(int i=0;i<m;++i){
+        int x,y;
+        cin>>x>>y;
+        graph.unite(x,y);
+    }
+    int k;
+    cin>>k;
+    set<pair<int,int>>badLine;
+    for(int i=0;i<k;++i){
+        int x,y;
+        cin>>x>>y;
+        badLine.insert({min(x,y),max(x,y)});
+    }
+    int q;
+    cin>>q;
+    for(int i=0;i<q;++i){
+        int p,q;
+        cin>>p>>q;
+        UnionFind g2=graph;
+        g2.unite(p,q);
+        bool flag=true;
+        for(auto it=badLine.begin();it!=badLine.end();++it){
+            if(g2.same(it->first,it->second)){
+                cout<<"No"<<endl;
+                flag=false;
+                break;
+            }
+        }
+        if(flag){
+            cout<<"Yes"<<endl;
+        }
+    }
     return 0;
 }
