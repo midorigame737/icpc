@@ -10,13 +10,12 @@ struct UnionFind
         if(par[x]==x){//根にたどり着いたか
             return x;
         }
-        else return root(par[x]);
+        return par[x]=root(par[x]);//次回以降の高速化のためにroot更新しておく
     }
     void unite(int x,int y){
         int rootx=root(x);
         int rooty=root(y);
-        if(rootx==rooty)return;//根が同じならなにもしない
-        par[rootx]=rooty;//        
+        if(rootx!=rooty)par[rootx]=rooty;//        
     }
     bool same(int x,int y){
         return root(x)==root(y);
@@ -42,7 +41,7 @@ int main(){
         cin>>x>>y;
         int rootx=graph.root(x);
         int rooty=graph.root(y);
-        badLine.emplace(make_pair(min(rootx,rooty),max(rootx,rooty)));
+        badLine.emplace(min(rootx,rooty),max(rootx,rooty));
     }
     int q;
     cin>>q;
