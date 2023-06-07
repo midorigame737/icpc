@@ -24,13 +24,15 @@ struct UnionFind
 };
 
 int main(){
-    int n,m;
-    cin>>n>>m;
+    int n;
+    cin>>n;
     UnionFind graph(n+1);
+    int m;
+    cin>>m;
     for(int i=0;i<m;++i){
-        int x,y;
-        cin>>x>>y;
-        graph.unite(x,y);
+        int v1,v2;
+        cin>>v1>>v2;
+        graph.unite(v1,v2);
     }
     int k;
     cin>>k;
@@ -38,26 +40,20 @@ int main(){
     for(int i=0;i<k;++i){
         int x,y;
         cin>>x>>y;
-        badLine.insert({min(x,y),max(x,y)});
+        int rootx=graph.root(x);
+        int rooty=graph.root(y);
+        badLine.emplace(make_pair(min(rootx,rooty),max(rootx,rooty)));
     }
     int q;
     cin>>q;
     for(int i=0;i<q;++i){
-        int p,q;
-        cin>>p>>q;
-        UnionFind g2=graph;
-        g2.unite(p,q);
-        bool flag=true;
-        for(auto it=badLine.begin();it!=badLine.end();++it){
-            if(g2.same(it->first,it->second)){
-                cout<<"No"<<endl;
-                flag=false;
-                break;
-            }
-        }
-        if(flag){
-            cout<<"Yes"<<endl;
-        }
+        int x,y;
+        cin>>x>>y;
+        int targetx=graph.root(x);
+        int targety=graph.root(y);
+        pair<int,int>target(min(targetx,targety),max(targetx,targety));
+        if(badLine.count(target)==0) cout<<"Yes"<<endl;
+        else cout<<"No"<<endl;
     }
     return 0;
 }
